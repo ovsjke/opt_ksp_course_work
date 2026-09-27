@@ -1,0 +1,4 @@
+.env
+cookies.txt
+bin/
+*.out

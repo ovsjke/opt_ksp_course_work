@@ -1,0 +1,36 @@
+name: pavel_ovsyannikov
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_NAME:-pavel_ovsyannikov}
+      POSTGRES_USER: ${DB_USER:-pavel_ovsyannikov}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    command: ["postgres", "-c", "shared_preload_libraries=pg_stat_statements", "-c", "pg_stat_statements.track=all"]
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  app:
+    build: .
+    environment:
+      APP_PORT: 8080
+      DATABASE_URL: postgres://${DB_USER:-pavel_ovsyannikov}:${DB_PASSWORD}@db:5432/${DB_NAME:-pavel_ovsyannikov}?sslmode=disable
+      SESSION_TTL: ${SESSION_TTL:-24h}
+    ports:
+      - "127.0.0.1:${APP_PORT:-8080}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  pgdata:

@@ -1,0 +1,11 @@
+table_name|row_count|rows_md5
+appointments|300|1b25f2a1b039e8cb04dd8065028d5400
+services|10|ffd7e0364fd9219716b41faedfb00a32
+sessions|0|d41d8cd98f00b204e9800998ecf8427e
+slots|500|1d71b159c804c118a9e8723a0d9cd0d4
+specialists|10|7a4c37dc48173a1e89754a9f3c73be65
+specialist_services|67|c767a90c1daa34b2d1d3c3705e100ce1
+users|1|39d1fda693528e7c47429833e60699e9
+status|count
+booked|228
+cancelled|72

@@ -1,0 +1,24 @@
+profile=small repetitions=20 period=[2026-10-01,2026-10-08) UTC; durations include body read
+operation                        p50 ms     p95 ms     max ms bytes min/max
+appointments first page           3.784      4.133      4.270  7794/7794
+appointments filtered             0.835      1.184      1.442  7681/7681
+appointment detail                0.309      0.531      0.573   376/376
+services                          0.253      0.330      0.392   683/683
+specialists                       0.237      0.273      0.284   433/433
+available slots                   1.018      1.542      1.591 17640/17640
+book appointment                  0.709      0.914      0.923   388/389
+cancel appointment                0.294      0.432      0.475    23/23
+dashboard                         0.964      1.264      1.270  1341/1341
+login                            61.364     74.146    110.670    16/16
+logout                            0.470      0.579      0.603    16/16
+state check (before -> after):
+  users                1 -> 1
+  specialists          10 -> 10
+  services             10 -> 10
+  specialist_services  67 -> 67
+  slots                500 -> 500
+  appointments         300 -> 300
+  sessions             0 -> 0
+  booked               228 -> 228
+  cancelled            72 -> 72
+state check: PASS
